@@ -1,0 +1,1166 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\azhao02\OneDrive - Syracuse University\ECN 623 Homework 1 Spring 2022 Ang Zhao.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 1 Mar 2022, 09:54:05
+{txt}
+{com}. use "C:\Users\azhao02\OneDrive - Syracuse University\fl8991pam6090.dta" , clear
+{txt}
+{com}.  
+.  *generate the quadratic term
+.  gen sqage = dmage*dmage
+{txt}
+{com}. 
+.  ***The probit model question
+.  **regression
+.  probit dead dmage sqage dmeduc dmar mblack mhispan motherr foreignb tobacco alcohol
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-27627.374}  
+Iteration 1:{space 3}log likelihood = {res:-27068.556}  
+Iteration 2:{space 3}log likelihood = {res:-27049.061}  
+Iteration 3:{space 3}log likelihood = {res: -27049.04}  
+Iteration 4:{space 3}log likelihood = {res: -27049.04}  
+{res}
+{txt}Probit regression{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 56}{lalign 13:LR chi2({res:10})}{col 69} = {res}{ralign 7:1156.67}
+{txt}{col 56}{lalign 13:Prob > chi2}{col 69} = {res}{ralign 7:0.0000}
+{txt}Log likelihood = {res:-27049.04}{col 56}{lalign 13:Pseudo R2}{col 69} = {res}{ralign 7:0.0209}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        dead{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0298198{col 26}{space 2}  .007158{col 37}{space 1}   -4.17{col 46}{space 3}0.000{col 54}{space 4}-.0438492{col 67}{space 3}-.0157904
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0005278{col 26}{space 2} .0001306{col 37}{space 1}    4.04{col 46}{space 3}0.000{col 54}{space 4} .0002719{col 67}{space 3} .0007837
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0175085{col 26}{space 2} .0024722{col 37}{space 1}   -7.08{col 46}{space 3}0.000{col 54}{space 4}-.0223539{col 67}{space 3}-.0126632
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .0978295{col 26}{space 2} .0133399{col 37}{space 1}    7.33{col 46}{space 3}0.000{col 54}{space 4} .0716837{col 67}{space 3} .1239753
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .2545934{col 26}{space 2} .0134845{col 37}{space 1}   18.88{col 46}{space 3}0.000{col 54}{space 4} .2281643{col 67}{space 3} .2810226
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0242959{col 26}{space 2} .0216054{col 37}{space 1}    1.12{col 46}{space 3}0.261{col 54}{space 4}-.0180499{col 67}{space 3} .0666418
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .1472543{col 26}{space 2} .0469883{col 37}{space 1}    3.13{col 46}{space 3}0.002{col 54}{space 4}  .055159{col 67}{space 3} .2393497
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0596647{col 26}{space 2} .0187209{col 37}{space 1}   -3.19{col 46}{space 3}0.001{col 54}{space 4}-.0963571{col 67}{space 3}-.0229724
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .1524063{col 26}{space 2} .0139093{col 37}{space 1}   10.96{col 46}{space 3}0.000{col 54}{space 4} .1251445{col 67}{space 3}  .179668
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2} .0645397{col 26}{space 2} .0285974{col 37}{space 1}    2.26{col 46}{space 3}0.024{col 54}{space 4} .0084899{col 67}{space 3} .1205895
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-1.919702{col 26}{space 2} .0928053{col 37}{space 1}  -20.69{col 46}{space 3}0.000{col 54}{space 4}-2.101597{col 67}{space 3}-1.737807
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}.  
+. **prediction question
+. predict deadhat, pr
+{txt}
+{com}. gen prec=0
+{txt}
+{com}. replace prec=1 if deadhat>0.5
+{txt}(0 real changes made)
+
+{com}. count if prec==dead
+  {res}561,153
+{txt}
+{com}. *Probability of crorrectly prediction: 561153/56943==0.992
+. 
+. **Average partial effect
+. probit dead dmage sqage dmar dmeduc foreignb mblack motherr mhispan tobacco alcohol
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-27627.374}  
+Iteration 1:{space 3}log likelihood = {res:-27068.556}  
+Iteration 2:{space 3}log likelihood = {res:-27049.061}  
+Iteration 3:{space 3}log likelihood = {res: -27049.04}  
+Iteration 4:{space 3}log likelihood = {res: -27049.04}  
+{res}
+{txt}Probit regression{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 56}{lalign 13:LR chi2({res:10})}{col 69} = {res}{ralign 7:1156.67}
+{txt}{col 56}{lalign 13:Prob > chi2}{col 69} = {res}{ralign 7:0.0000}
+{txt}Log likelihood = {res:-27049.04}{col 56}{lalign 13:Pseudo R2}{col 69} = {res}{ralign 7:0.0209}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        dead{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0298198{col 26}{space 2}  .007158{col 37}{space 1}   -4.17{col 46}{space 3}0.000{col 54}{space 4}-.0438492{col 67}{space 3}-.0157904
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0005278{col 26}{space 2} .0001306{col 37}{space 1}    4.04{col 46}{space 3}0.000{col 54}{space 4} .0002719{col 67}{space 3} .0007837
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .0978295{col 26}{space 2} .0133399{col 37}{space 1}    7.33{col 46}{space 3}0.000{col 54}{space 4} .0716837{col 67}{space 3} .1239753
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0175085{col 26}{space 2} .0024722{col 37}{space 1}   -7.08{col 46}{space 3}0.000{col 54}{space 4}-.0223539{col 67}{space 3}-.0126632
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0596647{col 26}{space 2} .0187209{col 37}{space 1}   -3.19{col 46}{space 3}0.001{col 54}{space 4}-.0963571{col 67}{space 3}-.0229724
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .2545934{col 26}{space 2} .0134845{col 37}{space 1}   18.88{col 46}{space 3}0.000{col 54}{space 4} .2281643{col 67}{space 3} .2810226
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .1472543{col 26}{space 2} .0469883{col 37}{space 1}    3.13{col 46}{space 3}0.002{col 54}{space 4}  .055159{col 67}{space 3} .2393497
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0242959{col 26}{space 2} .0216054{col 37}{space 1}    1.12{col 46}{space 3}0.261{col 54}{space 4}-.0180499{col 67}{space 3} .0666418
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .1524063{col 26}{space 2} .0139093{col 37}{space 1}   10.96{col 46}{space 3}0.000{col 54}{space 4} .1251445{col 67}{space 3}  .179668
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2} .0645397{col 26}{space 2} .0285974{col 37}{space 1}    2.26{col 46}{space 3}0.024{col 54}{space 4} .0084899{col 67}{space 3} .1205895
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-1.919702{col 26}{space 2} .0928053{col 37}{space 1}  -20.69{col 46}{space 3}0.000{col 54}{space 4}-2.101597{col 67}{space 3}-1.737807
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. margins, dydx(*)
+{res}
+{txt}Average marginal effects{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 1}Model VCE: {res:OIM}
+
+{txt}{p2colset 1 13 13 2}{...}
+{p2col:Expression:}{res:Pr(dead), predict()}{p_end}
+{p2col:dy/dx wrt:}{res:dmage sqage dmar dmeduc foreignb mblack motherr mhispan tobacco alcohol}{p_end}
+{p2colreset}{...}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}      dy/dx{col 26}   std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0006756{col 26}{space 2} .0001624{col 37}{space 1}   -4.16{col 46}{space 3}0.000{col 54}{space 4}-.0009938{col 67}{space 3}-.0003573
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2}  .000012{col 26}{space 2} 2.96e-06{col 37}{space 1}    4.04{col 46}{space 3}0.000{col 54}{space 4} 6.15e-06{col 67}{space 3} .0000178
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .0022163{col 26}{space 2} .0003034{col 37}{space 1}    7.31{col 46}{space 3}0.000{col 54}{space 4} .0016217{col 67}{space 3}  .002811
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0003967{col 26}{space 2} .0000562{col 37}{space 1}   -7.06{col 46}{space 3}0.000{col 54}{space 4}-.0005068{col 67}{space 3}-.0002865
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0013517{col 26}{space 2} .0004244{col 37}{space 1}   -3.18{col 46}{space 3}0.001{col 54}{space 4}-.0021836{col 67}{space 3}-.0005198
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .0057679{col 26}{space 2} .0003132{col 37}{space 1}   18.42{col 46}{space 3}0.000{col 54}{space 4} .0051541{col 67}{space 3} .0063816
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .0033361{col 26}{space 2} .0010653{col 37}{space 1}    3.13{col 46}{space 3}0.002{col 54}{space 4} .0012482{col 67}{space 3}  .005424
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0005504{col 26}{space 2} .0004895{col 37}{space 1}    1.12{col 46}{space 3}0.261{col 54}{space 4} -.000409{col 67}{space 3} .0015099
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .0034528{col 26}{space 2} .0003178{col 37}{space 1}   10.86{col 46}{space 3}0.000{col 54}{space 4} .0028299{col 67}{space 3} .0040757
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2} .0014622{col 26}{space 2} .0006481{col 37}{space 1}    2.26{col 46}{space 3}0.024{col 54}{space 4} .0001919{col 67}{space 3} .0027324
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. **Average partial effect at mean
+. margins, dydx(*) atmeans
+{res}
+{txt}Conditional marginal effects{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 1}Model VCE: {res:OIM}
+
+{txt}{p2colset 1 13 13 2}{...}
+{p2col:Expression:}{res:Pr(dead), predict()}{p_end}
+{p2col:dy/dx wrt:}{res:dmage sqage dmar dmeduc foreignb mblack motherr mhispan tobacco alcohol}{p_end}
+{p2colreset}{...}
+{lalign 4:At: }{space 0}{lalign 8:dmage} = {res:{ralign 8:26.24493}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:sqage} = {res:{ralign 8:722.3208}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:dmar} = {res:{ralign 8:.3105967}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:dmeduc} = {res:{ralign 8:12.36244}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:foreignb} = {res:{ralign 8:.1911164}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:mblack} = {res:{ralign 8:.2295143}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:motherr} = {res:{ralign 8:.014717}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:mhispan} = {res:{ralign 8:.1396218}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:tobacco} = {res:{ralign 8:.1804546}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:alcohol} = {res:{ralign 8:.0294924}} {txt:(mean)}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}      dy/dx{col 26}   std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0006285{col 26}{space 2} .0001508{col 37}{space 1}   -4.17{col 46}{space 3}0.000{col 54}{space 4} -.000924{col 67}{space 3}-.0003329
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0000111{col 26}{space 2} 2.75e-06{col 37}{space 1}    4.04{col 46}{space 3}0.000{col 54}{space 4} 5.73e-06{col 67}{space 3} .0000165
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .0020619{col 26}{space 2} .0002806{col 37}{space 1}    7.35{col 46}{space 3}0.000{col 54}{space 4}  .001512{col 67}{space 3} .0026118
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2} -.000369{col 26}{space 2} .0000519{col 37}{space 1}   -7.11{col 46}{space 3}0.000{col 54}{space 4}-.0004708{col 67}{space 3}-.0002672
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0012575{col 26}{space 2} .0003944{col 37}{space 1}   -3.19{col 46}{space 3}0.001{col 54}{space 4}-.0020305{col 67}{space 3}-.0004845
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .0053659{col 26}{space 2} .0002809{col 37}{space 1}   19.10{col 46}{space 3}0.000{col 54}{space 4} .0048152{col 67}{space 3} .0059165
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .0031036{col 26}{space 2} .0009898{col 37}{space 1}    3.14{col 46}{space 3}0.002{col 54}{space 4} .0011636{col 67}{space 3} .0050436
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0005121{col 26}{space 2} .0004553{col 37}{space 1}    1.12{col 46}{space 3}0.261{col 54}{space 4}-.0003804{col 67}{space 3} .0014045
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .0032121{col 26}{space 2} .0002915{col 37}{space 1}   11.02{col 46}{space 3}0.000{col 54}{space 4} .0026408{col 67}{space 3} .0037834
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2} .0013603{col 26}{space 2} .0006028{col 37}{space 1}    2.26{col 46}{space 3}0.024{col 54}{space 4} .0001788{col 67}{space 3} .0025417
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. **average effect when these two are considered as dummy variables
+. probit dead dmage sqage dmar dmeduc foreignb mblack motherr mhispan i.tobacco i.alcohol
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-27627.374}  
+Iteration 1:{space 3}log likelihood = {res:-27068.556}  
+Iteration 2:{space 3}log likelihood = {res:-27049.061}  
+Iteration 3:{space 3}log likelihood = {res: -27049.04}  
+Iteration 4:{space 3}log likelihood = {res: -27049.04}  
+{res}
+{txt}Probit regression{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 56}{lalign 13:LR chi2({res:10})}{col 69} = {res}{ralign 7:1156.67}
+{txt}{col 56}{lalign 13:Prob > chi2}{col 69} = {res}{ralign 7:0.0000}
+{txt}Log likelihood = {res:-27049.04}{col 56}{lalign 13:Pseudo R2}{col 69} = {res}{ralign 7:0.0209}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        dead{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0298198{col 26}{space 2}  .007158{col 37}{space 1}   -4.17{col 46}{space 3}0.000{col 54}{space 4}-.0438492{col 67}{space 3}-.0157904
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0005278{col 26}{space 2} .0001306{col 37}{space 1}    4.04{col 46}{space 3}0.000{col 54}{space 4} .0002719{col 67}{space 3} .0007837
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .0978295{col 26}{space 2} .0133399{col 37}{space 1}    7.33{col 46}{space 3}0.000{col 54}{space 4} .0716837{col 67}{space 3} .1239753
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0175085{col 26}{space 2} .0024722{col 37}{space 1}   -7.08{col 46}{space 3}0.000{col 54}{space 4}-.0223539{col 67}{space 3}-.0126632
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0596647{col 26}{space 2} .0187209{col 37}{space 1}   -3.19{col 46}{space 3}0.001{col 54}{space 4}-.0963571{col 67}{space 3}-.0229724
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .2545934{col 26}{space 2} .0134845{col 37}{space 1}   18.88{col 46}{space 3}0.000{col 54}{space 4} .2281643{col 67}{space 3} .2810226
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .1472543{col 26}{space 2} .0469883{col 37}{space 1}    3.13{col 46}{space 3}0.002{col 54}{space 4}  .055159{col 67}{space 3} .2393497
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0242959{col 26}{space 2} .0216054{col 37}{space 1}    1.12{col 46}{space 3}0.261{col 54}{space 4}-.0180499{col 67}{space 3} .0666418
+{txt}{space 3}1.tobacco {c |}{col 14}{res}{space 2} .1524063{col 26}{space 2} .0139093{col 37}{space 1}   10.96{col 46}{space 3}0.000{col 54}{space 4} .1251445{col 67}{space 3}  .179668
+{txt}{space 3}1.alcohol {c |}{col 14}{res}{space 2} .0645397{col 26}{space 2} .0285974{col 37}{space 1}    2.26{col 46}{space 3}0.024{col 54}{space 4} .0084899{col 67}{space 3} .1205895
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-1.919702{col 26}{space 2} .0928053{col 37}{space 1}  -20.69{col 46}{space 3}0.000{col 54}{space 4}-2.101597{col 67}{space 3}-1.737807
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. margins, dydx(*)
+{res}
+{txt}Average marginal effects{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 1}Model VCE: {res:OIM}
+
+{txt}{p2colset 1 13 13 2}{...}
+{p2col:Expression:}{res:Pr(dead), predict()}{p_end}
+{p2col:dy/dx wrt:}{res:dmage sqage dmar dmeduc foreignb mblack motherr mhispan 1.tobacco 1.alcohol}{p_end}
+{p2colreset}{...}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}      dy/dx{col 26}   std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0006756{col 26}{space 2} .0001624{col 37}{space 1}   -4.16{col 46}{space 3}0.000{col 54}{space 4}-.0009938{col 67}{space 3}-.0003573
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2}  .000012{col 26}{space 2} 2.96e-06{col 37}{space 1}    4.04{col 46}{space 3}0.000{col 54}{space 4} 6.15e-06{col 67}{space 3} .0000178
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .0022163{col 26}{space 2} .0003034{col 37}{space 1}    7.31{col 46}{space 3}0.000{col 54}{space 4} .0016217{col 67}{space 3}  .002811
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0003967{col 26}{space 2} .0000562{col 37}{space 1}   -7.06{col 46}{space 3}0.000{col 54}{space 4}-.0005068{col 67}{space 3}-.0002865
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0013517{col 26}{space 2} .0004244{col 37}{space 1}   -3.18{col 46}{space 3}0.001{col 54}{space 4}-.0021836{col 67}{space 3}-.0005198
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .0057679{col 26}{space 2} .0003132{col 37}{space 1}   18.42{col 46}{space 3}0.000{col 54}{space 4} .0051541{col 67}{space 3} .0063816
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .0033361{col 26}{space 2} .0010653{col 37}{space 1}    3.13{col 46}{space 3}0.002{col 54}{space 4} .0012482{col 67}{space 3}  .005424
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0005504{col 26}{space 2} .0004895{col 37}{space 1}    1.12{col 46}{space 3}0.261{col 54}{space 4} -.000409{col 67}{space 3} .0015099
+{txt}{space 3}1.tobacco {c |}{col 14}{res}{space 2} .0038515{col 26}{space 2} .0003915{col 37}{space 1}    9.84{col 46}{space 3}0.000{col 54}{space 4} .0030841{col 67}{space 3} .0046189
+{txt}{space 3}1.alcohol {c |}{col 14}{res}{space 2} .0015693{col 26}{space 2} .0007448{col 37}{space 1}    2.11{col 46}{space 3}0.035{col 54}{space 4} .0001096{col 67}{space 3}  .003029
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 78}Note: dy/dx for factor levels is the discrete change from the base level.{txt}{p_end}
+{res}{txt}
+{com}. 
+. 
+. ***The logit model question
+. **repeat of question one excluding margins at mean
+. *logit regression
+. logit dead dmage sqage dmar dmeduc foreignb mblack motherr mhispan tobacco alcohol
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-27627.374}  
+Iteration 1:{space 3}log likelihood = {res:-27118.522}  
+Iteration 2:{space 3}log likelihood = {res: -27051.89}  
+Iteration 3:{space 3}log likelihood = {res:-27051.826}  
+Iteration 4:{space 3}log likelihood = {res:-27051.826}  
+{res}
+{txt}Logistic regression{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 56}{lalign 13:LR chi2({res:10})}{col 69} = {res}{ralign 7:1151.10}
+{txt}{col 56}{lalign 13:Prob > chi2}{col 69} = {res}{ralign 7:0.0000}
+{txt}Log likelihood = {res:-27051.826}{col 56}{lalign 13:Pseudo R2}{col 69} = {res}{ralign 7:0.0208}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        dead{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0769192{col 26}{space 2} .0191073{col 37}{space 1}   -4.03{col 46}{space 3}0.000{col 54}{space 4}-.1143688{col 67}{space 3}-.0394695
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0013552{col 26}{space 2} .0003499{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} .0006695{col 67}{space 3}  .002041
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .2625815{col 26}{space 2}  .036239{col 37}{space 1}    7.25{col 46}{space 3}0.000{col 54}{space 4} .1915543{col 67}{space 3} .3336087
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0476287{col 26}{space 2} .0066583{col 37}{space 1}   -7.15{col 46}{space 3}0.000{col 54}{space 4}-.0606787{col 67}{space 3}-.0345786
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2} -.166652{col 26}{space 2} .0513482{col 37}{space 1}   -3.25{col 46}{space 3}0.001{col 54}{space 4}-.2672926{col 67}{space 3}-.0660113
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .6813733{col 26}{space 2} .0361173{col 37}{space 1}   18.87{col 46}{space 3}0.000{col 54}{space 4} .6105846{col 67}{space 3}  .752162
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .4086585{col 26}{space 2} .1283388{col 37}{space 1}    3.18{col 46}{space 3}0.001{col 54}{space 4}  .157119{col 67}{space 3}  .660198
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0652053{col 26}{space 2} .0596765{col 37}{space 1}    1.09{col 46}{space 3}0.275{col 54}{space 4}-.0517586{col 67}{space 3} .1821691
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .4113891{col 26}{space 2} .0371749{col 37}{space 1}   11.07{col 46}{space 3}0.000{col 54}{space 4} .3385276{col 67}{space 3} .4842507
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2}  .167473{col 26}{space 2} .0743974{col 37}{space 1}    2.25{col 46}{space 3}0.024{col 54}{space 4} .0216568{col 67}{space 3} .3132892
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-3.547066{col 26}{space 2} .2460432{col 37}{space 1}  -14.42{col 46}{space 3}0.000{col 54}{space 4}-4.029302{col 67}{space 3}-3.064831
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. **test how well the coefficients fit
+. predict deadhat2, pr
+{txt}
+{com}. gen prec2=0
+{txt}
+{com}. replace prec2=1 if deadhat2>0.5
+{txt}(0 real changes made)
+
+{com}. count if prec2==dead
+  {res}561,153
+{txt}
+{com}. *The probability of correct prediction: 561153/565943==0.992
+. 
+. *Average partial effect
+. margins, dydx(*)
+{res}
+{txt}Average marginal effects{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 1}Model VCE: {res:OIM}
+
+{txt}{p2colset 1 13 13 2}{...}
+{p2col:Expression:}{res:Pr(dead), predict()}{p_end}
+{p2col:dy/dx wrt:}{res:dmage sqage dmar dmeduc foreignb mblack motherr mhispan tobacco alcohol}{p_end}
+{p2colreset}{...}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}      dy/dx{col 26}   std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2} -.000644{col 26}{space 2} .0001602{col 37}{space 1}   -4.02{col 46}{space 3}0.000{col 54}{space 4} -.000958{col 67}{space 3}  -.00033
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0000113{col 26}{space 2} 2.93e-06{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} 5.60e-06{col 67}{space 3} .0000171
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .0021985{col 26}{space 2} .0003049{col 37}{space 1}    7.21{col 46}{space 3}0.000{col 54}{space 4} .0016008{col 67}{space 3} .0027961
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0003988{col 26}{space 2}  .000056{col 37}{space 1}   -7.12{col 46}{space 3}0.000{col 54}{space 4}-.0005086{col 67}{space 3} -.000289
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0013953{col 26}{space 2} .0004303{col 37}{space 1}   -3.24{col 46}{space 3}0.001{col 54}{space 4}-.0022388{col 67}{space 3}-.0005518
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .0057048{col 26}{space 2} .0003126{col 37}{space 1}   18.25{col 46}{space 3}0.000{col 54}{space 4} .0050921{col 67}{space 3} .0063175
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .0034215{col 26}{space 2} .0010756{col 37}{space 1}    3.18{col 46}{space 3}0.001{col 54}{space 4} .0013134{col 67}{space 3} .0055296
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0005459{col 26}{space 2} .0004997{col 37}{space 1}    1.09{col 46}{space 3}0.275{col 54}{space 4}-.0004335{col 67}{space 3} .0015253
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .0034443{col 26}{space 2} .0003149{col 37}{space 1}   10.94{col 46}{space 3}0.000{col 54}{space 4} .0028271{col 67}{space 3} .0040616
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2} .0014022{col 26}{space 2} .0006232{col 37}{space 1}    2.25{col 46}{space 3}0.024{col 54}{space 4} .0001807{col 67}{space 3} .0026236
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. *average effect when these two are considered as dummy variables
+. logit dead dmage sqage dmar dmeduc foreignb mblack motherr mhispan i.tobacco i.alcohol
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-27627.374}  
+Iteration 1:{space 3}log likelihood = {res:-27118.522}  
+Iteration 2:{space 3}log likelihood = {res: -27051.89}  
+Iteration 3:{space 3}log likelihood = {res:-27051.826}  
+Iteration 4:{space 3}log likelihood = {res:-27051.826}  
+{res}
+{txt}Logistic regression{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 56}{lalign 13:LR chi2({res:10})}{col 69} = {res}{ralign 7:1151.10}
+{txt}{col 56}{lalign 13:Prob > chi2}{col 69} = {res}{ralign 7:0.0000}
+{txt}Log likelihood = {res:-27051.826}{col 56}{lalign 13:Pseudo R2}{col 69} = {res}{ralign 7:0.0208}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        dead{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0769192{col 26}{space 2} .0191073{col 37}{space 1}   -4.03{col 46}{space 3}0.000{col 54}{space 4}-.1143688{col 67}{space 3}-.0394695
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0013552{col 26}{space 2} .0003499{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} .0006695{col 67}{space 3}  .002041
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .2625815{col 26}{space 2}  .036239{col 37}{space 1}    7.25{col 46}{space 3}0.000{col 54}{space 4} .1915543{col 67}{space 3} .3336087
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0476287{col 26}{space 2} .0066583{col 37}{space 1}   -7.15{col 46}{space 3}0.000{col 54}{space 4}-.0606787{col 67}{space 3}-.0345786
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2} -.166652{col 26}{space 2} .0513482{col 37}{space 1}   -3.25{col 46}{space 3}0.001{col 54}{space 4}-.2672926{col 67}{space 3}-.0660113
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .6813733{col 26}{space 2} .0361173{col 37}{space 1}   18.87{col 46}{space 3}0.000{col 54}{space 4} .6105846{col 67}{space 3}  .752162
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .4086585{col 26}{space 2} .1283388{col 37}{space 1}    3.18{col 46}{space 3}0.001{col 54}{space 4}  .157119{col 67}{space 3}  .660198
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0652053{col 26}{space 2} .0596765{col 37}{space 1}    1.09{col 46}{space 3}0.275{col 54}{space 4}-.0517586{col 67}{space 3} .1821691
+{txt}{space 3}1.tobacco {c |}{col 14}{res}{space 2} .4113891{col 26}{space 2} .0371749{col 37}{space 1}   11.07{col 46}{space 3}0.000{col 54}{space 4} .3385276{col 67}{space 3} .4842507
+{txt}{space 3}1.alcohol {c |}{col 14}{res}{space 2}  .167473{col 26}{space 2} .0743974{col 37}{space 1}    2.25{col 46}{space 3}0.024{col 54}{space 4} .0216568{col 67}{space 3} .3132892
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-3.547066{col 26}{space 2} .2460432{col 37}{space 1}  -14.42{col 46}{space 3}0.000{col 54}{space 4}-4.029302{col 67}{space 3}-3.064831
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. margins, dydx(*)
+{res}
+{txt}Average marginal effects{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 1}Model VCE: {res:OIM}
+
+{txt}{p2colset 1 13 13 2}{...}
+{p2col:Expression:}{res:Pr(dead), predict()}{p_end}
+{p2col:dy/dx wrt:}{res:dmage sqage dmar dmeduc foreignb mblack motherr mhispan 1.tobacco 1.alcohol}{p_end}
+{p2colreset}{...}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}      dy/dx{col 26}   std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2} -.000644{col 26}{space 2} .0001602{col 37}{space 1}   -4.02{col 46}{space 3}0.000{col 54}{space 4} -.000958{col 67}{space 3}  -.00033
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0000113{col 26}{space 2} 2.93e-06{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} 5.60e-06{col 67}{space 3} .0000171
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .0021985{col 26}{space 2} .0003049{col 37}{space 1}    7.21{col 46}{space 3}0.000{col 54}{space 4} .0016008{col 67}{space 3} .0027961
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0003988{col 26}{space 2}  .000056{col 37}{space 1}   -7.12{col 46}{space 3}0.000{col 54}{space 4}-.0005086{col 67}{space 3} -.000289
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0013953{col 26}{space 2} .0004303{col 37}{space 1}   -3.24{col 46}{space 3}0.001{col 54}{space 4}-.0022388{col 67}{space 3}-.0005518
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .0057048{col 26}{space 2} .0003126{col 37}{space 1}   18.25{col 46}{space 3}0.000{col 54}{space 4} .0050921{col 67}{space 3} .0063175
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .0034215{col 26}{space 2} .0010756{col 37}{space 1}    3.18{col 46}{space 3}0.001{col 54}{space 4} .0013134{col 67}{space 3} .0055296
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0005459{col 26}{space 2} .0004997{col 37}{space 1}    1.09{col 46}{space 3}0.275{col 54}{space 4}-.0004335{col 67}{space 3} .0015253
+{txt}{space 3}1.tobacco {c |}{col 14}{res}{space 2} .0038947{col 26}{space 2} .0003979{col 37}{space 1}    9.79{col 46}{space 3}0.000{col 54}{space 4} .0031148{col 67}{space 3} .0046746
+{txt}{space 3}1.alcohol {c |}{col 14}{res}{space 2} .0015137{col 26}{space 2} .0007246{col 37}{space 1}    2.09{col 46}{space 3}0.037{col 54}{space 4} .0000935{col 67}{space 3} .0029339
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 78}Note: dy/dx for factor levels is the discrete change from the base level.{txt}{p_end}
+{res}{txt}
+{com}. 
+. *maximum likelihood estimator
+. mlogit dead dmage sqage dmar dmeduc foreignb mblack motherr mhispan tobacco alcohol
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-27627.374}  
+Iteration 1:{space 3}log likelihood = {res:-27118.522}  
+Iteration 2:{space 3}log likelihood = {res: -27051.89}  
+Iteration 3:{space 3}log likelihood = {res:-27051.826}  
+Iteration 4:{space 3}log likelihood = {res:-27051.826}  
+{res}
+{txt}Multinomial logistic regression{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 56}{lalign 13:LR chi2({res:10})}{col 69} = {res}{ralign 7:1151.10}
+{txt}{col 56}{lalign 13:Prob > chi2}{col 69} = {res}{ralign 7:0.0000}
+{txt}Log likelihood = {res:-27051.826}{col 56}{lalign 13:Pseudo R2}{col 69} = {res}{ralign 7:0.0208}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        dead{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}{res}0           {col 14}{txt}{c |}  (base outcome)
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}1            {txt}{c |}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0769192{col 26}{space 2} .0191073{col 37}{space 1}   -4.03{col 46}{space 3}0.000{col 54}{space 4}-.1143688{col 67}{space 3}-.0394695
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0013552{col 26}{space 2} .0003499{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} .0006695{col 67}{space 3}  .002041
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .2625815{col 26}{space 2}  .036239{col 37}{space 1}    7.25{col 46}{space 3}0.000{col 54}{space 4} .1915543{col 67}{space 3} .3336087
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0476287{col 26}{space 2} .0066583{col 37}{space 1}   -7.15{col 46}{space 3}0.000{col 54}{space 4}-.0606787{col 67}{space 3}-.0345786
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2} -.166652{col 26}{space 2} .0513482{col 37}{space 1}   -3.25{col 46}{space 3}0.001{col 54}{space 4}-.2672926{col 67}{space 3}-.0660113
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .6813733{col 26}{space 2} .0361173{col 37}{space 1}   18.87{col 46}{space 3}0.000{col 54}{space 4} .6105846{col 67}{space 3}  .752162
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .4086585{col 26}{space 2} .1283388{col 37}{space 1}    3.18{col 46}{space 3}0.001{col 54}{space 4}  .157119{col 67}{space 3}  .660198
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0652053{col 26}{space 2} .0596765{col 37}{space 1}    1.09{col 46}{space 3}0.275{col 54}{space 4}-.0517586{col 67}{space 3} .1821691
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .4113891{col 26}{space 2} .0371749{col 37}{space 1}   11.07{col 46}{space 3}0.000{col 54}{space 4} .3385276{col 67}{space 3} .4842507
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2}  .167473{col 26}{space 2} .0743974{col 37}{space 1}    2.25{col 46}{space 3}0.024{col 54}{space 4} .0216568{col 67}{space 3} .3132892
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-3.547066{col 26}{space 2} .2460432{col 37}{space 1}  -14.42{col 46}{space 3}0.000{col 54}{space 4}-4.029302{col 67}{space 3}-3.064831
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. *find the estimator
+. logit dead dmage sqage dmar dmeduc foreignb mblack motherr mhispan tobacco alcohol
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-27627.374}  
+Iteration 1:{space 3}log likelihood = {res:-27118.522}  
+Iteration 2:{space 3}log likelihood = {res: -27051.89}  
+Iteration 3:{space 3}log likelihood = {res:-27051.826}  
+Iteration 4:{space 3}log likelihood = {res:-27051.826}  
+{res}
+{txt}Logistic regression{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 56}{lalign 13:LR chi2({res:10})}{col 69} = {res}{ralign 7:1151.10}
+{txt}{col 56}{lalign 13:Prob > chi2}{col 69} = {res}{ralign 7:0.0000}
+{txt}Log likelihood = {res:-27051.826}{col 56}{lalign 13:Pseudo R2}{col 69} = {res}{ralign 7:0.0208}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        dead{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0769192{col 26}{space 2} .0191073{col 37}{space 1}   -4.03{col 46}{space 3}0.000{col 54}{space 4}-.1143688{col 67}{space 3}-.0394695
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0013552{col 26}{space 2} .0003499{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} .0006695{col 67}{space 3}  .002041
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .2625815{col 26}{space 2}  .036239{col 37}{space 1}    7.25{col 46}{space 3}0.000{col 54}{space 4} .1915543{col 67}{space 3} .3336087
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0476287{col 26}{space 2} .0066583{col 37}{space 1}   -7.15{col 46}{space 3}0.000{col 54}{space 4}-.0606787{col 67}{space 3}-.0345786
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2} -.166652{col 26}{space 2} .0513482{col 37}{space 1}   -3.25{col 46}{space 3}0.001{col 54}{space 4}-.2672926{col 67}{space 3}-.0660113
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .6813733{col 26}{space 2} .0361173{col 37}{space 1}   18.87{col 46}{space 3}0.000{col 54}{space 4} .6105846{col 67}{space 3}  .752162
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .4086585{col 26}{space 2} .1283388{col 37}{space 1}    3.18{col 46}{space 3}0.001{col 54}{space 4}  .157119{col 67}{space 3}  .660198
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0652053{col 26}{space 2} .0596765{col 37}{space 1}    1.09{col 46}{space 3}0.275{col 54}{space 4}-.0517586{col 67}{space 3} .1821691
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .4113891{col 26}{space 2} .0371749{col 37}{space 1}   11.07{col 46}{space 3}0.000{col 54}{space 4} .3385276{col 67}{space 3} .4842507
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2}  .167473{col 26}{space 2} .0743974{col 37}{space 1}    2.25{col 46}{space 3}0.024{col 54}{space 4} .0216568{col 67}{space 3} .3132892
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-3.547066{col 26}{space 2} .2460432{col 37}{space 1}  -14.42{col 46}{space 3}0.000{col 54}{space 4}-4.029302{col 67}{space 3}-3.064831
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. ereturn list
+
+{txt}scalars:
+               e(rank) =  {res}11
+                  {txt}e(N) =  {res}565943
+                 {txt}e(ic) =  {res}4
+                  {txt}e(k) =  {res}11
+               {txt}e(k_eq) =  {res}1
+               {txt}e(k_dv) =  {res}1
+          {txt}e(converged) =  {res}1
+                 {txt}e(rc) =  {res}0
+                 {txt}e(ll) =  {res}-27051.82584249014
+         {txt}e(k_eq_model) =  {res}1
+               {txt}e(ll_0) =  {res}-27627.37444154886
+               {txt}e(df_m) =  {res}10
+               {txt}e(chi2) =  {res}1151.097198117452
+                  {txt}e(p) =  {res}5.0764447267e-241
+              {txt}e(N_cdf) =  {res}0
+              {txt}e(N_cds) =  {res}0
+               {txt}e(r2_p) =  {res}.0208325478150815
+
+{txt}macros:
+            e(cmdline) : "{res}logit dead dmage sqage dmar dmeduc foreignb mblack{txt}.."
+                e(cmd) : "{res}logit{txt}"
+          e(estat_cmd) : "{res}logit_estat{txt}"
+            e(predict) : "{res}logit_p{txt}"
+          e(marginsok) : "{res}default Pr{txt}"
+       e(marginsnotok) : "{res}stdp DBeta DEviance DX2 DDeviance Hat Number Resid{txt}.."
+              e(title) : "{res}Logistic regression{txt}"
+           e(chi2type) : "{res}LR{txt}"
+                e(opt) : "{res}moptimize{txt}"
+                e(vce) : "{res}oim{txt}"
+               e(user) : "{res}mopt__logit_d2(){txt}"
+          e(ml_method) : "{res}d2{txt}"
+          e(technique) : "{res}nr{txt}"
+              e(which) : "{res}max{txt}"
+             e(depvar) : "{res}dead{txt}"
+         e(properties) : "{res}b V{txt}"
+
+matrices:
+                  e(b) : {res} 1 x 11
+                  {txt}e(V) : {res} 11 x 11
+                {txt}e(mns) : {res} 1 x 11
+              {txt}e(rules) : {res} 1 x 4
+               {txt}e(ilog) : {res} 1 x 20
+           {txt}e(gradient) : {res} 1 x 11
+
+{txt}functions:
+             e(sample)   
+
+{com}.  vce, corr
+{res}
+{txt}Correlation matrix of coefficients of {res:logit} model
+{res}
+{txt}{space 0}{space 13}{c |}{res}{space 1}{lalign 8:dead}{space 1}{txt}{space 10}{space 10}{space 10}{space 10}{space 10}
+{space 0}{space 0}{ralign 12:e(V)}{space 1}{c |}{space 1}{ralign 8:dmage}{space 1}{space 1}{ralign 8:sqage}{space 1}{space 1}{ralign 8:dmar}{space 1}{space 1}{ralign 8:dmeduc}{space 1}{space 1}{ralign 8:foreignb}{space 1}{space 1}{ralign 8:mblack}{space 1}
+{space 0}{hline 13}{c   +}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+{space 0}{res:{lalign 13:dead}}{c |}{space 10}{space 10}{space 10}{space 10}{space 10}{space 10}
+{space 0}{space 0}{ralign 12:dmage}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}
+{space 0}{space 0}{ralign 12:sqage}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.9897}}}{space 1}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}
+{space 0}{space 0}{ralign 12:dmar}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.1781}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1444}}}{space 1}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}
+{space 0}{space 0}{ralign 12:dmeduc}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.2500}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2124}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1510}}}{space 1}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}
+{space 0}{space 0}{ralign 12:foreignb}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.0821}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0504}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0575}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1958}}}{space 1}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}
+{space 0}{space 0}{ralign 12:mblack}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.0027}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0018}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.4247}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0516}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1426}}}{space 1}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}
+{space 0}{space 0}{ralign 12:motherr}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.0076}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0047}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0181}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0036}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2616}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1379}}}{space 1}
+{space 0}{space 0}{ralign 12:mhispan}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.0111}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0197}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0759}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0673}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.5418}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3080}}}{space 1}
+{space 0}{space 0}{ralign 12:tobacco}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.1377}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1230}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1491}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1867}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1158}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2444}}}{space 1}
+{space 0}{space 0}{ralign 12:alcohol}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.0462}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0323}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0388}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0001}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0407}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0560}}}{space 1}
+{space 0}{space 0}{ralign 12:_cons}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.9357}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.9167}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2975}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0603}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0320}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0611}}}{space 1}
+
+{space 0}{space 13}{c |}{res}{space 1}{lalign 8:dead}{space 1}{txt}{space 10}{space 10}{space 10}{space 10}
+{space 0}{space 0}{ralign 12:e(V)}{space 1}{c |}{space 1}{ralign 8:motherr}{space 1}{space 1}{ralign 8:mhispan}{space 1}{space 1}{ralign 8:tobacco}{space 1}{space 1}{ralign 8:alcohol}{space 1}{space 1}{ralign 8:_cons}{space 1}
+{space 0}{hline 13}{c   +}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+{space 0}{res:{lalign 13:dead}}{c |}{space 10}{space 10}{space 10}{space 10}{space 10}
+{space 0}{space 0}{ralign 12:motherr}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}
+{space 0}{space 0}{ralign 12:mhispan}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.1869}}}{space 1}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}
+{space 0}{space 0}{ralign 12:tobacco}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.0372}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1110}}}{space 1}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}
+{space 0}{space 0}{ralign 12:alcohol}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.0091}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0119}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2085}}}{space 1}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}{space 1}{ralign 8:{res:{sf:{space 8}}}}{space 1}
+{space 0}{space 0}{ralign 12:_cons}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.0230}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0444}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0473}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0593}}}{space 1}{space 1}{ralign 8:{res:{sf:  1.0000}}}{space 1}
+
+{com}. nlcom _b[dmage]/-2/_b[sqage]
+
+       {txt}_nl_1: {res}_b[dmage]/-2/_b[sqage]
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        dead{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_nl_1 {c |}{col 14}{res}{space 2} 28.37861{col 26}{space 2} 1.069077{col 37}{space 1}   26.54{col 46}{space 3}0.000{col 54}{space 4} 26.28326{col 67}{space 3} 30.47397
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. ***prediction of specific conditions
+. logit dead dmage sqage dmar dmeduc foreignb mblack motherr mhispan tobacco alcohol
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-27627.374}  
+Iteration 1:{space 3}log likelihood = {res:-27118.522}  
+Iteration 2:{space 3}log likelihood = {res: -27051.89}  
+Iteration 3:{space 3}log likelihood = {res:-27051.826}  
+Iteration 4:{space 3}log likelihood = {res:-27051.826}  
+{res}
+{txt}Logistic regression{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 56}{lalign 13:LR chi2({res:10})}{col 69} = {res}{ralign 7:1151.10}
+{txt}{col 56}{lalign 13:Prob > chi2}{col 69} = {res}{ralign 7:0.0000}
+{txt}Log likelihood = {res:-27051.826}{col 56}{lalign 13:Pseudo R2}{col 69} = {res}{ralign 7:0.0208}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        dead{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0769192{col 26}{space 2} .0191073{col 37}{space 1}   -4.03{col 46}{space 3}0.000{col 54}{space 4}-.1143688{col 67}{space 3}-.0394695
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0013552{col 26}{space 2} .0003499{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} .0006695{col 67}{space 3}  .002041
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .2625815{col 26}{space 2}  .036239{col 37}{space 1}    7.25{col 46}{space 3}0.000{col 54}{space 4} .1915543{col 67}{space 3} .3336087
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0476287{col 26}{space 2} .0066583{col 37}{space 1}   -7.15{col 46}{space 3}0.000{col 54}{space 4}-.0606787{col 67}{space 3}-.0345786
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2} -.166652{col 26}{space 2} .0513482{col 37}{space 1}   -3.25{col 46}{space 3}0.001{col 54}{space 4}-.2672926{col 67}{space 3}-.0660113
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .6813733{col 26}{space 2} .0361173{col 37}{space 1}   18.87{col 46}{space 3}0.000{col 54}{space 4} .6105846{col 67}{space 3}  .752162
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .4086585{col 26}{space 2} .1283388{col 37}{space 1}    3.18{col 46}{space 3}0.001{col 54}{space 4}  .157119{col 67}{space 3}  .660198
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0652053{col 26}{space 2} .0596765{col 37}{space 1}    1.09{col 46}{space 3}0.275{col 54}{space 4}-.0517586{col 67}{space 3} .1821691
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .4113891{col 26}{space 2} .0371749{col 37}{space 1}   11.07{col 46}{space 3}0.000{col 54}{space 4} .3385276{col 67}{space 3} .4842507
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2}  .167473{col 26}{space 2} .0743974{col 37}{space 1}    2.25{col 46}{space 3}0.024{col 54}{space 4} .0216568{col 67}{space 3} .3132892
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-3.547066{col 26}{space 2} .2460432{col 37}{space 1}  -14.42{col 46}{space 3}0.000{col 54}{space 4}-4.029302{col 67}{space 3}-3.064831
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. *predictnl phat = normal(xb(#1)), se(phat_se) **** doesn't work for this case
+. predict phat
+{txt}(option {bf:pr} assumed; Pr(dead))
+
+{com}. sum phat if dmage==25 & dmeduc==12 & dmar==1 & mblack==0 & mhispan==0 & motherr==0 & foreignb==0 & tobacco==1 & alcohol==0
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 8}phat {c |}{res}        670    .0107653           0   .0107653   .0107653
+{txt}
+{com}. *calculate the matrix step by step
+. matrix input x=(25 625 12 1 0 0 0 0 1 0 1)
+{txt}
+{com}. matrix v=e(v)
+{txt}
+{com}. matrix xvx=x*v*x'
+{txt}
+{com}. sca fphat=exp(phat)/( (1+exp(-phat))^2 )
+{txt}
+{com}. matrix vphat=(fphat^2)*xvx
+{txt}
+{com}. matrix list vphat
+{res}
+{txt}symmetric vphat[1,1]
+    r1
+r1 {res}  .
+{reset}
+{com}. **the std.err is not shown. Thus the confidence interval is unfined. 
+. 
+. **** (e)  ***
+. *marginal effects at means
+. margins, dydx( dmage sqage dmeduc dmar mblack mhispan motherr foreignb tobacco alcohol)  atmeans
+{res}
+{txt}Conditional marginal effects{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 1}Model VCE: {res:OIM}
+
+{txt}{p2colset 1 13 13 2}{...}
+{p2col:Expression:}{res:Pr(dead), predict()}{p_end}
+{p2col:dy/dx wrt:}{res:dmage sqage dmar dmeduc foreignb mblack motherr mhispan tobacco alcohol}{p_end}
+{p2colreset}{...}
+{lalign 4:At: }{space 0}{lalign 8:dmage} = {res:{ralign 8:26.24493}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:sqage} = {res:{ralign 8:722.3208}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:dmar} = {res:{ralign 8:.3105967}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:dmeduc} = {res:{ralign 8:12.36244}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:foreignb} = {res:{ralign 8:.1911164}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:mblack} = {res:{ralign 8:.2295143}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:motherr} = {res:{ralign 8:.014717}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:mhispan} = {res:{ralign 8:.1396218}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:tobacco} = {res:{ralign 8:.1804546}} {txt:(mean)}
+{lalign 4:}{space 0}{lalign 8:alcohol} = {res:{ralign 8:.0294924}} {txt:(mean)}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}      dy/dx{col 26}   std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0005782{col 26}{space 2} .0001435{col 37}{space 1}   -4.03{col 46}{space 3}0.000{col 54}{space 4}-.0008596{col 67}{space 3}-.0002969
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} .0000102{col 26}{space 2} 2.63e-06{col 37}{space 1}    3.88{col 46}{space 3}0.000{col 54}{space 4} 5.04e-06{col 67}{space 3} .0000153
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2}  .001974{col 26}{space 2} .0002715{col 37}{space 1}    7.27{col 46}{space 3}0.000{col 54}{space 4} .0014419{col 67}{space 3}  .002506
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2} -.000358{col 26}{space 2} .0000498{col 37}{space 1}   -7.19{col 46}{space 3}0.000{col 54}{space 4}-.0004556{col 67}{space 3}-.0002605
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0012528{col 26}{space 2} .0003857{col 37}{space 1}   -3.25{col 46}{space 3}0.001{col 54}{space 4}-.0020087{col 67}{space 3}-.0004969
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .0051222{col 26}{space 2}  .000266{col 37}{space 1}   19.26{col 46}{space 3}0.000{col 54}{space 4} .0046009{col 67}{space 3} .0056435
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .0030721{col 26}{space 2} .0009639{col 37}{space 1}    3.19{col 46}{space 3}0.001{col 54}{space 4} .0011829{col 67}{space 3} .0049613
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0004902{col 26}{space 2} .0004486{col 37}{space 1}    1.09{col 46}{space 3}0.275{col 54}{space 4}-.0003891{col 67}{space 3} .0013694
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .0030926{col 26}{space 2} .0002768{col 37}{space 1}   11.17{col 46}{space 3}0.000{col 54}{space 4}   .00255{col 67}{space 3} .0036352
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2}  .001259{col 26}{space 2} .0005594{col 37}{space 1}    2.25{col 46}{space 3}0.024{col 54}{space 4} .0001626{col 67}{space 3} .0023553
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. *marignal effects with some conditions
+. margins, dydx( dmage sqage dmeduc dmar mblack mhispan motherr foreignb tobacco alcohol) at (dmage=28 sqage=784  dmeduc=17  dmar=0 mblack=0 mhispan=0 motherr=0 foreignb=0 tobacco=0 alcohol=0)
+{res}
+{txt}Conditional marginal effects{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:565,943}
+{txt}{col 1}Model VCE: {res:OIM}
+
+{txt}{p2colset 1 13 13 2}{...}
+{p2col:Expression:}{res:Pr(dead), predict()}{p_end}
+{p2col:dy/dx wrt:}{res:dmage sqage dmar dmeduc foreignb mblack motherr mhispan tobacco alcohol}{p_end}
+{p2colreset}{...}
+{lalign 4:At: }{space 0}{lalign 8:dmage} = {res:{ralign 3:28}}
+{lalign 4:}{space 0}{lalign 8:sqage} = {res:{ralign 3:784}}
+{lalign 4:}{space 0}{lalign 8:dmar} = {res:{ralign 3:0}}
+{lalign 4:}{space 0}{lalign 8:dmeduc} = {res:{ralign 3:17}}
+{lalign 4:}{space 0}{lalign 8:foreignb} = {res:{ralign 3:0}}
+{lalign 4:}{space 0}{lalign 8:mblack} = {res:{ralign 3:0}}
+{lalign 4:}{space 0}{lalign 8:motherr} = {res:{ralign 3:0}}
+{lalign 4:}{space 0}{lalign 8:mhispan} = {res:{ralign 3:0}}
+{lalign 4:}{space 0}{lalign 8:tobacco} = {res:{ralign 3:0}}
+{lalign 4:}{space 0}{lalign 8:alcohol} = {res:{ralign 3:0}}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}      dy/dx{col 26}   std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0003283{col 26}{space 2} .0000808{col 37}{space 1}   -4.07{col 46}{space 3}0.000{col 54}{space 4}-.0004866{col 67}{space 3}  -.00017
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2} 5.78e-06{col 26}{space 2} 1.48e-06{col 37}{space 1}    3.92{col 46}{space 3}0.000{col 54}{space 4} 2.89e-06{col 67}{space 3} 8.68e-06
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2} .0011207{col 26}{space 2} .0001592{col 37}{space 1}    7.04{col 46}{space 3}0.000{col 54}{space 4} .0008086{col 67}{space 3} .0014329
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0002033{col 26}{space 2} .0000245{col 37}{space 1}   -8.31{col 46}{space 3}0.000{col 54}{space 4}-.0002512{col 67}{space 3}-.0001553
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0007113{col 26}{space 2} .0002207{col 37}{space 1}   -3.22{col 46}{space 3}0.001{col 54}{space 4}-.0011438{col 67}{space 3}-.0002788
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .0029082{col 26}{space 2} .0001646{col 37}{space 1}   17.67{col 46}{space 3}0.000{col 54}{space 4} .0025855{col 67}{space 3} .0032308
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} .0017442{col 26}{space 2}  .000547{col 37}{space 1}    3.19{col 46}{space 3}0.001{col 54}{space 4} .0006721{col 67}{space 3} .0028163
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2} .0002783{col 26}{space 2} .0002538{col 37}{space 1}    1.10{col 46}{space 3}0.273{col 54}{space 4}-.0002192{col 67}{space 3} .0007758
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .0017559{col 26}{space 2} .0001584{col 37}{space 1}   11.08{col 46}{space 3}0.000{col 54}{space 4} .0014453{col 67}{space 3} .0020664
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2} .0007148{col 26}{space 2} .0003177{col 37}{space 1}    2.25{col 46}{space 3}0.024{col 54}{space 4} .0000922{col 67}{space 3} .0013374
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. /*** (f) ****/
+. reg dead dmage sqage dmeduc dmar mblack mhispan motherr foreignb tobacco alcohol, robust
+
+{txt}Linear regression                               Number of obs     = {res}   565,943
+                                                {txt}F(10, 565932)     =  {res}    89.98
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0022
+                                                {txt}Root MSE          =    {res} .09151
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}        dead{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}dmage {c |}{col 14}{res}{space 2}-.0007901{col 26}{space 2} .0001985{col 37}{space 1}   -3.98{col 46}{space 3}0.000{col 54}{space 4}-.0011792{col 67}{space 3} -.000401
+{txt}{space 7}sqage {c |}{col 14}{res}{space 2}  .000014{col 26}{space 2} 3.52e-06{col 37}{space 1}    3.97{col 46}{space 3}0.000{col 54}{space 4} 7.09e-06{col 67}{space 3} .0000209
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2}-.0003588{col 26}{space 2} .0000571{col 37}{space 1}   -6.28{col 46}{space 3}0.000{col 54}{space 4}-.0004707{col 67}{space 3}-.0002469
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2}  .002487{col 26}{space 2} .0003553{col 37}{space 1}    7.00{col 46}{space 3}0.000{col 54}{space 4} .0017906{col 67}{space 3} .0031834
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} .0068402{col 26}{space 2} .0004021{col 37}{space 1}   17.01{col 46}{space 3}0.000{col 54}{space 4} .0060521{col 67}{space 3} .0076283
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2}  .000682{col 26}{space 2} .0004554{col 37}{space 1}    1.50{col 46}{space 3}0.134{col 54}{space 4}-.0002107{col 67}{space 3} .0015746
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2}  .003331{col 26}{space 2} .0010497{col 37}{space 1}    3.17{col 46}{space 3}0.002{col 54}{space 4} .0012736{col 67}{space 3} .0053885
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-.0014312{col 26}{space 2} .0004202{col 37}{space 1}   -3.41{col 46}{space 3}0.001{col 54}{space 4}-.0022549{col 67}{space 3}-.0006076
+{txt}{space 5}tobacco {c |}{col 14}{res}{space 2} .0036107{col 26}{space 2} .0003757{col 37}{space 1}    9.61{col 46}{space 3}0.000{col 54}{space 4} .0028744{col 67}{space 3}  .004347
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2} .0022874{col 26}{space 2} .0008684{col 37}{space 1}    2.63{col 46}{space 3}0.008{col 54}{space 4} .0005854{col 67}{space 3} .0039894
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0205985{col 26}{space 2} .0026772{col 37}{space 1}    7.69{col 46}{space 3}0.000{col 54}{space 4} .0153513{col 67}{space 3} .0258457
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. *lincom 25*_b[dmage]+625*_b[sqage]+12*_b[dmeduc]+_b[dmar]+_b[tobacco]
+. predict phat2
+{txt}(option {bf:xb} assumed; fitted values)
+
+{com}. sum phat2 if dmage==25 & dmeduc==12 & dmar==1 & mblack==0 & mhispan==0 & motherr==0 & foreignb==0 & tobacco==1 & alcohol==0
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 7}phat2 {c |}{res}        670    .0113816           0   .0113816   .0113816
+{txt}
+{com}. matrix olsb=e(b)
+{txt}
+{com}. matrix olsV=e(V)
+{txt}
+{com}. matrix probxbols=x*olsb'
+{txt}
+{com}. matrix list probxbols
+{res}
+{txt}symmetric probxbols[1,1]
+           y1
+r1 {res} .01138163
+{reset}
+{com}. matrix Vprobxbols=x*olsV*x'
+{txt}
+{com}. matrix list Vprobxbols
+{res}
+{txt}symmetric Vprobxbols[1,1]
+           r1
+r1 {res} 1.903e-07
+{reset}
+{com}. 
+. clear
+{txt}
+{com}. *set obs set
+. set seed 10101
+{txt}
+{com}. set obs 20
+{txt}{p}
+Number of observations ({bf:_N}) was 0,
+now 20.
+{p_end}
+
+{com}. 
+. *generate distribution
+. gen rn1=rchi2(4)
+{txt}
+{com}. gen rn2=runiform(1,2)
+{txt}
+{com}. *generate explantory variables
+. gen x1=rn1-4
+{txt}
+{com}. gen x2=rn2+3.5
+{txt}
+{com}. *generate residuals 
+. gen rn3=rnormal(0,5)
+{txt}
+{com}. gen rn4=rnormal(0, sqrt(5))
+{txt}
+{com}. gen rn5=runiform()
+{txt}
+{com}. gen u=0
+{txt}
+{com}. replace u=rn3 if rn5<=0.3
+{txt}(11 real changes made)
+
+{com}. replace u=rn4 if rn5>0.3
+{txt}(9 real changes made)
+
+{com}. *generate the dependent variable
+. gen y=1.3*x1+0.7*x2+0.5*u
+{txt}
+{com}. 
+. **ols
+. reg y x1 x2
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}        20
+{txt}{hline 13}{c +}{hline 34}   F(2, 17)        = {res}    19.74
+{txt}       Model {c |} {res} 126.773966         2  63.3869831   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 54.5827872        17  3.21075219   {txt}R-squared       ={res}    0.6990
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.6636
+{txt}       Total {c |} {res} 181.356753        19  9.54509228   {txt}Root MSE        =   {res} 1.7919
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           y{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}x1 {c |}{col 14}{res}{space 2} 1.074087{col 26}{space 2} .2267883{col 37}{space 1}    4.74{col 46}{space 3}0.000{col 54}{space 4} .5956056{col 67}{space 3} 1.552569
+{txt}{space 10}x2 {c |}{col 14}{res}{space 2} 4.081218{col 26}{space 2} 1.302936{col 37}{space 1}    3.13{col 46}{space 3}0.006{col 54}{space 4} 1.332263{col 67}{space 3} 6.830172
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-16.97237{col 26}{space 2}    6.553{col 37}{space 1}   -2.59{col 46}{space 3}0.019{col 54}{space 4}  -30.798{col 67}{space 3}-3.146753
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *delta method
+. nlcom _b[x1]+_b[x2]^2, post
+
+       {txt}_nl_1: {res}_b[x1]+_b[x2]^2
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           y{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_nl_1 {c |}{col 14}{res}{space 2} 17.73043{col 26}{space 2} 10.59347{col 37}{space 1}    1.67{col 46}{space 3}0.094{col 54}{space 4}-3.032391{col 67}{space 3} 38.49324
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *bootstrap
+. bootstrap gamma=(_b[x1]+_b[x2]^2), reps(25) : regress y x1 x2
+{res}{txt}(running {bf:regress} on estimation sample)
+
+Bootstrap replications ({res}25{txt})
+{hline 4}{c +}{hline 3} 1 {hline 3}{c +}{hline 3} 2 {hline 3}{c +}{hline 3} 3 {hline 3}{c +}{hline 3} 4 {hline 3}{c +}{hline 3} 5 
+.........................
+{res}
+{txt}Linear regression{col 61}{lalign 13:Number of obs}{col 74} = {res}{ralign 2:20}
+{txt}{col 61}{lalign 13:Replications}{col 74} = {res}{ralign 2:25}
+{p2colset 7 16 20 2}{...}
+
+{txt}{p2col :Command:}{res:regress y x1 x2}{p_end}
+{p2colset 9 16 20 2}{...}
+{p2col :gamma:}{res:_b[x1]+_b[x2]^2}{p_end}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}   Observed{col 26}   Bootstrap{col 54}         Norm{col 67}al-based
+{col 14}{c |} coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}gamma {c |}{col 14}{res}{space 2} 17.73043{col 26}{space 2} 13.40495{col 37}{space 1}    1.32{col 46}{space 3}0.186{col 54}{space 4}-8.542795{col 67}{space 3} 44.00365
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. bootstrap gamma=(_b[x1]+_b[x2]^2), reps(200) : regress y x1 x2
+{res}{txt}(running {bf:regress} on estimation sample)
+
+Bootstrap replications ({res}200{txt})
+{hline 4}{c +}{hline 3} 1 {hline 3}{c +}{hline 3} 2 {hline 3}{c +}{hline 3} 3 {hline 3}{c +}{hline 3} 4 {hline 3}{c +}{hline 3} 5 
+..................................................    50
+..................................................   100
+..................................................   150
+..................................................   200
+{res}
+{txt}Linear regression{col 60}{lalign 13:Number of obs}{col 73} = {res}{ralign 3:20}
+{txt}{col 60}{lalign 13:Replications}{col 73} = {res}{ralign 3:200}
+{p2colset 7 16 20 2}{...}
+
+{txt}{p2col :Command:}{res:regress y x1 x2}{p_end}
+{p2colset 9 16 20 2}{...}
+{p2col :gamma:}{res:_b[x1]+_b[x2]^2}{p_end}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}   Observed{col 26}   Bootstrap{col 54}         Norm{col 67}al-based
+{col 14}{c |} coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}gamma {c |}{col 14}{res}{space 2} 17.73043{col 26}{space 2} 11.02367{col 37}{space 1}    1.61{col 46}{space 3}0.108{col 54}{space 4}-3.875569{col 67}{space 3} 39.33642
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *test a given hypothesis
+. bootstrap gamma=(_b[x1]+_b[x2]^2), reps(999): regress y x1 x2 
+{res}{txt}(running {bf:regress} on estimation sample)
+
+Bootstrap replications ({res}999{txt})
+{hline 4}{c +}{hline 3} 1 {hline 3}{c +}{hline 3} 2 {hline 3}{c +}{hline 3} 3 {hline 3}{c +}{hline 3} 4 {hline 3}{c +}{hline 3} 5 
+..................................................    50
+..................................................   100
+..................................................   150
+..................................................   200
+..................................................   250
+..................................................   300
+..................................................   350
+..................................................   400
+..................................................   450
+..................................................   500
+..................................................   550
+..................................................   600
+..................................................   650
+..................................................   700
+..................................................   750
+..................................................   800
+..................................................   850
+..................................................   900
+..................................................   950
+.................................................
+{res}
+{txt}Linear regression{col 60}{lalign 13:Number of obs}{col 73} = {res}{ralign 3:20}
+{txt}{col 60}{lalign 13:Replications}{col 73} = {res}{ralign 3:999}
+{p2colset 7 16 20 2}{...}
+
+{txt}{p2col :Command:}{res:regress y x1 x2}{p_end}
+{p2colset 9 16 20 2}{...}
+{p2col :gamma:}{res:_b[x1]+_b[x2]^2}{p_end}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}   Observed{col 26}   Bootstrap{col 54}         Norm{col 67}al-based
+{col 14}{c |} coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}gamma {c |}{col 14}{res}{space 2} 17.73043{col 26}{space 2} 10.74922{col 37}{space 1}    1.65{col 46}{space 3}0.099{col 54}{space 4}-3.337663{col 67}{space 3} 38.79852
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. test gamma=1
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}gamma = 1{p_end}
+
+{txt}{col 12}chi2(  1) ={res}    2.42
+{txt}{col 10}Prob > chi2 =  {res}  0.1196
+{txt}
+{com}. 
+. 
+. use "C:\Users\azhao02\OneDrive - Syracuse University\pa-pam6090.dta" , clear
+{txt}
+{com}. 
+. ***OLS only on tobacco
+. reg dbirwt tobacco
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}   100,000
+{txt}{hline 13}{c +}{hline 34}   F(1, 99998)     = {res}  3121.29
+{txt}       Model {c |} {res} 1.0181e+09         1  1.0181e+09   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 3.2618e+10    99,998  326186.262   {txt}R-squared       ={res}    0.0303
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0303
+{txt}       Total {c |} {res} 3.3636e+10    99,999  336364.307   {txt}Root MSE        =   {res} 571.13
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      dbirwt{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}tobacco {c |}{col 14}{res}{space 2}-266.0286{col 26}{space 2} 4.761694{col 37}{space 1}  -55.87{col 46}{space 3}0.000{col 54}{space 4}-275.3614{col 67}{space 3}-256.6957
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  3423.36{col 26}{space 2} 1.987458{col 37}{space 1} 1722.48{col 46}{space 3}0.000{col 54}{space 4} 3419.465{col 67}{space 3} 3427.256
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. ***OLS on all explantory variables
+. reg dbirwt tobacco dmage dmage2 dmeduc dmar mblack mhispan motherr foreignb dfage dfeduc fblack fhispan fotherr alcohol drink tripre0 tripre2 tripre3 nprevist  adequac2 adequac3   first dlivord disllb  pre4000 plural  diabete  anemia  cardiac  chyper
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}   100,000
+{txt}{hline 13}{c +}{hline 34}   F(31, 99968)    = {res}   593.20
+{txt}       Model {c |} {res} 5.2260e+09        31   168581591   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 2.8410e+10    99,968  284191.591   {txt}R-squared       ={res}    0.1554
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1551
+{txt}       Total {c |} {res} 3.3636e+10    99,999  336364.307   {txt}Root MSE        =   {res}  533.1
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      dbirwt{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}tobacco {c |}{col 14}{res}{space 2}-231.9765{col 26}{space 2} 4.728613{col 37}{space 1}  -49.06{col 46}{space 3}0.000{col 54}{space 4}-241.2445{col 67}{space 3}-222.7084
+{txt}{space 7}dmage {c |}{col 14}{res}{space 2} 10.02328{col 26}{space 2} 2.757812{col 37}{space 1}    3.63{col 46}{space 3}0.000{col 54}{space 4} 4.618007{col 67}{space 3} 15.42856
+{txt}{space 6}dmage2 {c |}{col 14}{res}{space 2}-.2252022{col 26}{space 2} .0479878{col 37}{space 1}   -4.69{col 46}{space 3}0.000{col 54}{space 4}-.3192576{col 67}{space 3}-.1311468
+{txt}{space 6}dmeduc {c |}{col 14}{res}{space 2} 5.072409{col 26}{space 2}  1.10596{col 37}{space 1}    4.59{col 46}{space 3}0.000{col 54}{space 4} 2.904742{col 67}{space 3} 7.240077
+{txt}{space 8}dmar {c |}{col 14}{res}{space 2}-46.76048{col 26}{space 2} 5.308448{col 37}{space 1}   -8.81{col 46}{space 3}0.000{col 54}{space 4}-57.16497{col 67}{space 3}-36.35598
+{txt}{space 6}mblack {c |}{col 14}{res}{space 2} -144.013{col 26}{space 2} 13.74771{col 37}{space 1}  -10.48{col 46}{space 3}0.000{col 54}{space 4}-170.9583{col 67}{space 3}-117.0677
+{txt}{space 5}mhispan {c |}{col 14}{res}{space 2}-84.10188{col 26}{space 2}  15.7054{col 37}{space 1}   -5.35{col 46}{space 3}0.000{col 54}{space 4}-114.8843{col 67}{space 3}-53.31949
+{txt}{space 5}motherr {c |}{col 14}{res}{space 2} -70.4887{col 26}{space 2} 22.16101{col 37}{space 1}   -3.18{col 46}{space 3}0.001{col 54}{space 4} -113.924{col 67}{space 3} -27.0534
+{txt}{space 4}foreignb {c |}{col 14}{res}{space 2}-24.98241{col 26}{space 2} 10.01551{col 37}{space 1}   -2.49{col 46}{space 3}0.013{col 54}{space 4}-44.61269{col 67}{space 3}-5.352136
+{txt}{space 7}dfage {c |}{col 14}{res}{space 2}-.2261802{col 26}{space 2} .4161856{col 37}{space 1}   -0.54{col 46}{space 3}0.587{col 54}{space 4}-1.041899{col 67}{space 3} .5895385
+{txt}{space 6}dfeduc {c |}{col 14}{res}{space 2} 5.673311{col 26}{space 2}  .994836{col 37}{space 1}    5.70{col 46}{space 3}0.000{col 54}{space 4} 3.723444{col 67}{space 3} 7.623177
+{txt}{space 6}fblack {c |}{col 14}{res}{space 2}-67.35051{col 26}{space 2} 13.41039{col 37}{space 1}   -5.02{col 46}{space 3}0.000{col 54}{space 4}-93.63471{col 67}{space 3}-41.06631
+{txt}{space 5}fhispan {c |}{col 14}{res}{space 2}-51.27105{col 26}{space 2} 14.51006{col 37}{space 1}   -3.53{col 46}{space 3}0.000{col 54}{space 4}-79.71059{col 67}{space 3}-22.83151
+{txt}{space 5}fotherr {c |}{col 14}{res}{space 2}-120.8135{col 26}{space 2} 21.73168{col 37}{space 1}   -5.56{col 46}{space 3}0.000{col 54}{space 4}-163.4073{col 67}{space 3}-78.21968
+{txt}{space 5}alcohol {c |}{col 14}{res}{space 2} -6.06584{col 26}{space 2} 17.46978{col 37}{space 1}   -0.35{col 46}{space 3}0.728{col 54}{space 4} -40.3064{col 67}{space 3} 28.17472
+{txt}{space 7}drink {c |}{col 14}{res}{space 2}-16.05994{col 26}{space 2}  3.00625{col 37}{space 1}   -5.34{col 46}{space 3}0.000{col 54}{space 4}-21.95216{col 67}{space 3}-10.16773
+{txt}{space 5}tripre0 {c |}{col 14}{res}{space 2}-119.5509{col 26}{space 2} 21.64776{col 37}{space 1}   -5.52{col 46}{space 3}0.000{col 54}{space 4}-161.9802{col 67}{space 3}-77.12152
+{txt}{space 5}tripre2 {c |}{col 14}{res}{space 2} 38.79551{col 26}{space 2} 7.832542{col 37}{space 1}    4.95{col 46}{space 3}0.000{col 54}{space 4} 23.44382{col 67}{space 3} 54.14719
+{txt}{space 5}tripre3 {c |}{col 14}{res}{space 2} 69.32469{col 26}{space 2} 16.77842{col 37}{space 1}    4.13{col 46}{space 3}0.000{col 54}{space 4} 36.43918{col 67}{space 3} 102.2102
+{txt}{space 4}nprevist {c |}{col 14}{res}{space 2} 35.99032{col 26}{space 2} .6821501{col 37}{space 1}   52.76{col 46}{space 3}0.000{col 54}{space 4} 34.65331{col 67}{space 3} 37.32733
+{txt}{space 4}adequac2 {c |}{col 14}{res}{space 2} 58.42312{col 26}{space 2} 7.375267{col 37}{space 1}    7.92{col 46}{space 3}0.000{col 54}{space 4} 43.96769{col 67}{space 3} 72.87855
+{txt}{space 4}adequac3 {c |}{col 14}{res}{space 2} 139.6219{col 26}{space 2} 15.28608{col 37}{space 1}    9.13{col 46}{space 3}0.000{col 54}{space 4} 109.6613{col 67}{space 3} 169.5824
+{txt}{space 7}first {c |}{col 14}{res}{space 2}-83.79721{col 26}{space 2} 6.018787{col 37}{space 1}  -13.92{col 46}{space 3}0.000{col 54}{space 4}-95.59395{col 67}{space 3}-72.00046
+{txt}{space 5}dlivord {c |}{col 14}{res}{space 2} 26.95428{col 26}{space 2} 2.243541{col 37}{space 1}   12.01{col 46}{space 3}0.000{col 54}{space 4} 22.55697{col 67}{space 3}  31.3516
+{txt}{space 6}disllb {c |}{col 14}{res}{space 2}-.1696148{col 26}{space 2} .0729207{col 37}{space 1}   -2.33{col 46}{space 3}0.020{col 54}{space 4}-.3125384{col 67}{space 3}-.0266911
+{txt}{space 5}pre4000 {c |}{col 14}{res}{space 2} 466.7685{col 26}{space 2} 16.61542{col 37}{space 1}   28.09{col 46}{space 3}0.000{col 54}{space 4} 434.2025{col 67}{space 3} 499.3345
+{txt}{space 6}plural {c |}{col 14}{res}{space 2}-973.2287{col 26}{space 2}  13.4593{col 37}{space 1}  -72.31{col 46}{space 3}0.000{col 54}{space 4}-999.6088{col 67}{space 3}-946.8487
+{txt}{space 5}diabete {c |}{col 14}{res}{space 2} 50.84775{col 26}{space 2} 12.72971{col 37}{space 1}    3.99{col 46}{space 3}0.000{col 54}{space 4} 25.89768{col 67}{space 3} 75.79782
+{txt}{space 6}anemia {c |}{col 14}{res}{space 2} -66.1317{col 26}{space 2} 17.87755{col 37}{space 1}   -3.70{col 46}{space 3}0.000{col 54}{space 4}-101.1715{col 67}{space 3}-31.09192
+{txt}{space 5}cardiac {c |}{col 14}{res}{space 2} -47.5407{col 26}{space 2} 24.63252{col 37}{space 1}   -1.93{col 46}{space 3}0.054{col 54}{space 4}-95.82014{col 67}{space 3} .7387308
+{txt}{space 6}chyper {c |}{col 14}{res}{space 2} -175.809{col 26}{space 2}  19.1913{col 37}{space 1}   -9.16{col 46}{space 3}0.000{col 54}{space 4}-213.4237{col 67}{space 3}-138.1943
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  2805.36{col 26}{space 2} 39.86317{col 37}{space 1}   70.37{col 46}{space 3}0.000{col 54}{space 4} 2727.228{col 67}{space 3} 2883.491
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ***kernel
+. help kdensity
+{txt}
+{com}. * default kernel and optimal bandwidth
+. kdensity dbirwt
+{res}{txt}
+{com}. kdensity dbirwt, kernel(ep)
+{res}{txt}
+{com}. 
+. * gaussian kernel and bandwidth of 5 (small)
+. kdensity dbirwt, kernel(gau) bwidth(5)
+{res}{txt}
+{com}. *gaussian kernel and bandwidth of 100 (large)
+. kdensity dbirwt, kernel(gau) bwidth(100)
+{res}{txt}
+{com}. **Thus, the default function with optimal bandwidth is the best estimator. 
+. 
+. **two graphs
+. twoway kdensity dbirwt if tobacco==1, color(grey)  || kdensity dbirwt if tobacco==0
+{p 0 4 2}
+{txt}(note:  named style
+grey not found in class
+color,  default attributes used)
+{p_end}
+{p 0 4 2}
+{txt}(note:  named style
+grey not found in class
+color,  default attributes used)
+{p_end}
+{p 0 4 2}
+{txt}(note:  named style
+grey not found in class
+color,  default attributes used)
+{p_end}
+{p 0 4 2}
+{txt}(note:  named style
+grey not found in class
+color,  default attributes used)
+{p_end}
+{p 0 4 2}
+{txt}(note:  named style
+grey not found in class
+color,  default attributes used)
+{p_end}
+{res}{txt}
+{com}. 
+. 
+. **with interaction terms
+. reg dbirwt tobacco dmage dmage2 dmeduc dmeduc#dmeduc dmar mblack mblack#dmeduc mhispan mhispan#dmeduc motherr foreignb dfage dfeduc fblack fhispan fotherr alcohol drink alcohol#tripre0 tripre0 tripre2 tripre3 nprevist adequac2 adequac3 first dlivord disllb pre4000 plural diabete anemia cardiac chyper
+{txt}{p 0 6 2}note: {bf:17.dmeduc} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:1.mblack#17.dmeduc} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:1.mhispan#17.dmeduc} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:1.alcohol#0b.tripre0} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:1.alcohol#1.tripre0} omitted because of collinearity.{p_end}
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}   100,000
+{txt}{hline 13}{c +}{hline 34}   F(82, 99917)    = {res}   225.50
+{txt}       Model {c |} {res} 5.2528e+09        82  64058856.2   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 2.8383e+10    99,917  284068.458   {txt}R-squared       ={res}    0.1562
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1555
+{txt}       Total {c |} {res} 3.3636e+10    99,999  336364.307   {txt}Root MSE        =   {res} 532.98
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       dbirwt{col 15}{c |} Coefficient{col 27}  Std. err.{col 39}      t{col 47}   P>|t|{col 55}     [95% con{col 68}f. interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}tobacco {c |}{col 15}{res}{space 2}-227.9166{col 27}{space 2} 4.770601{col 38}{space 1}  -47.78{col 47}{space 3}0.000{col 55}{space 4} -237.267{col 68}{space 3}-218.5663
+{txt}{space 8}dmage {c |}{col 15}{res}{space 2} 7.851245{col 27}{space 2} 2.888743{col 38}{space 1}    2.72{col 47}{space 3}0.007{col 55}{space 4} 2.189344{col 68}{space 3} 13.51315
+{txt}{space 7}dmage2 {c |}{col 15}{res}{space 2}-.1938515{col 27}{space 2}  .050165{col 38}{space 1}   -3.86{col 47}{space 3}0.000{col 55}{space 4}-.2921742{col 68}{space 3}-.0955287
+{txt}{space 7}dmeduc {c |}{col 15}{res}{space 2}-.3277048{col 27}{space 2} 5.841609{col 38}{space 1}   -0.06{col 47}{space 3}0.955{col 55}{space 4}-11.77719{col 68}{space 3} 11.12178
+{txt}{space 13} {c |}
+{space 7}dmeduc {c |}
+{space 11}1  {c |}{col 15}{res}{space 2}-124.4884{col 27}{space 2} 221.3406{col 38}{space 1}   -0.56{col 47}{space 3}0.574{col 55}{space 4}-558.3132{col 68}{space 3} 309.3364
+{txt}{space 11}2  {c |}{col 15}{res}{space 2} 132.0012{col 27}{space 2} 162.4439{col 38}{space 1}    0.81{col 47}{space 3}0.416{col 55}{space 4}-186.3868{col 68}{space 3} 450.3892
+{txt}{space 11}3  {c |}{col 15}{res}{space 2} 138.9876{col 27}{space 2} 173.5216{col 38}{space 1}    0.80{col 47}{space 3}0.423{col 55}{space 4}-201.1127{col 68}{space 3} 479.0879
+{txt}{space 11}4  {c |}{col 15}{res}{space 2} 8.221407{col 27}{space 2} 130.1684{col 38}{space 1}    0.06{col 47}{space 3}0.950{col 55}{space 4}-246.9071{col 68}{space 3} 263.3499
+{txt}{space 11}5  {c |}{col 15}{res}{space 2}-213.5874{col 27}{space 2} 135.1365{col 38}{space 1}   -1.58{col 47}{space 3}0.114{col 55}{space 4}-478.4532{col 68}{space 3} 51.27846
+{txt}{space 11}6  {c |}{col 15}{res}{space 2} 76.81468{col 27}{space 2} 103.1391{col 38}{space 1}    0.74{col 47}{space 3}0.456{col 55}{space 4}-125.3366{col 68}{space 3}  278.966
+{txt}{space 11}7  {c |}{col 15}{res}{space 2}-89.18832{col 27}{space 2} 70.56891{col 38}{space 1}   -1.26{col 47}{space 3}0.206{col 55}{space 4}-227.5025{col 68}{space 3} 49.12588
+{txt}{space 11}8  {c |}{col 15}{res}{space 2}  23.1602{col 27}{space 2} 53.75898{col 38}{space 1}    0.43{col 47}{space 3}0.667{col 55}{space 4}-82.20674{col 68}{space 3} 128.5271
+{txt}{space 11}9  {c |}{col 15}{res}{space 2}-67.95109{col 27}{space 2} 48.37289{col 38}{space 1}   -1.40{col 47}{space 3}0.160{col 55}{space 4}-162.7614{col 68}{space 3} 26.85919
+{txt}{space 10}10  {c |}{col 15}{res}{space 2}-44.86334{col 27}{space 2} 42.02173{col 38}{space 1}   -1.07{col 47}{space 3}0.286{col 55}{space 4}-127.2254{col 68}{space 3} 37.49874
+{txt}{space 10}11  {c |}{col 15}{res}{space 2}-50.87419{col 27}{space 2} 36.43471{col 38}{space 1}   -1.40{col 47}{space 3}0.163{col 55}{space 4}-122.2858{col 68}{space 3}  20.5374
+{txt}{space 10}12  {c |}{col 15}{res}{space 2}-14.27368{col 27}{space 2} 29.51654{col 38}{space 1}   -0.48{col 47}{space 3}0.629{col 55}{space 4}-72.12574{col 68}{space 3} 43.57838
+{txt}{space 10}13  {c |}{col 15}{res}{space 2}-8.521564{col 27}{space 2}  24.8452{col 38}{space 1}   -0.34{col 47}{space 3}0.732{col 55}{space 4}-57.21785{col 68}{space 3} 40.17472
+{txt}{space 10}14  {c |}{col 15}{res}{space 2}-1.131353{col 27}{space 2} 19.16761{col 38}{space 1}   -0.06{col 47}{space 3}0.953{col 55}{space 4}-38.69963{col 68}{space 3} 36.43692
+{txt}{space 10}15  {c |}{col 15}{res}{space 2} 7.473846{col 27}{space 2} 16.66058{col 38}{space 1}    0.45{col 47}{space 3}0.654{col 55}{space 4}-25.18069{col 68}{space 3} 40.12839
+{txt}{space 10}16  {c |}{col 15}{res}{space 2} 19.49997{col 27}{space 2} 9.673374{col 38}{space 1}    2.02{col 47}{space 3}0.044{col 55}{space 4} .5402787{col 68}{space 3} 38.45967
+{txt}{space 10}17  {c |}{col 15}{res}{space 2}        0{col 27}{txt}  (omitted)
+{space 13} {c |}
+{space 9}dmar {c |}{col 15}{res}{space 2}-41.92792{col 27}{space 2} 5.368403{col 38}{space 1}   -7.81{col 47}{space 3}0.000{col 55}{space 4}-52.44993{col 68}{space 3}-31.40592
+{txt}{space 7}mblack {c |}{col 15}{res}{space 2}-107.5923{col 27}{space 2} 34.77401{col 38}{space 1}   -3.09{col 47}{space 3}0.002{col 55}{space 4} -175.749{col 68}{space 3}-39.43568
+{txt}{space 13} {c |}
+mblack#dmeduc {c |}
+{space 8}1  0  {c |}{col 15}{res}{space 2} 163.7016{col 27}{space 2} 259.8567{col 38}{space 1}    0.63{col 47}{space 3}0.529{col 55}{space 4}-345.6143{col 68}{space 3} 673.0175
+{txt}{space 8}1  1  {c |}{col 15}{res}{space 2}-92.66112{col 27}{space 2} 369.4267{col 38}{space 1}   -0.25{col 47}{space 3}0.802{col 55}{space 4}-816.7329{col 68}{space 3} 631.4107
+{txt}{space 8}1  2  {c |}{col 15}{res}{space 2} 227.7081{col 27}{space 2} 338.7696{col 38}{space 1}    0.67{col 47}{space 3}0.501{col 55}{space 4}-436.2762{col 68}{space 3} 891.6924
+{txt}{space 8}1  3  {c |}{col 15}{res}{space 2}-222.5281{col 27}{space 2} 554.1096{col 38}{space 1}   -0.40{col 47}{space 3}0.688{col 55}{space 4}-1308.576{col 68}{space 3}   863.52
+{txt}{space 8}1  4  {c |}{col 15}{res}{space 2} 200.5889{col 27}{space 2}  288.944{col 38}{space 1}    0.69{col 47}{space 3}0.488{col 55}{space 4}-365.7378{col 68}{space 3} 766.9157
+{txt}{space 8}1  5  {c |}{col 15}{res}{space 2}  -87.351{col 27}{space 2} 396.0279{col 38}{space 1}   -0.22{col 47}{space 3}0.825{col 55}{space 4}-863.5609{col 68}{space 3} 688.8589
+{txt}{space 8}1  6  {c |}{col 15}{res}{space 2} 12.79326{col 27}{space 2}  148.952{col 38}{space 1}    0.09{col 47}{space 3}0.932{col 55}{space 4}-279.1508{col 68}{space 3} 304.7373
+{txt}{space 8}1  7  {c |}{col 15}{res}{space 2} 174.5106{col 27}{space 2} 104.4758{col 38}{space 1}    1.67{col 47}{space 3}0.095{col 55}{space 4}-30.26064{col 68}{space 3} 379.2818
+{txt}{space 8}1  8  {c |}{col 15}{res}{space 2}-44.07871{col 27}{space 2}  56.7017{col 38}{space 1}   -0.78{col 47}{space 3}0.437{col 55}{space 4}-155.2133{col 68}{space 3} 67.05591
+{txt}{space 8}1  9  {c |}{col 15}{res}{space 2} 7.298542{col 27}{space 2} 42.88169{col 38}{space 1}    0.17{col 47}{space 3}0.865{col 55}{space 4}-76.74904{col 68}{space 3} 91.34612
+{txt}{space 8}1 10  {c |}{col 15}{res}{space 2}-17.00369{col 27}{space 2} 37.95086{col 38}{space 1}   -0.45{col 47}{space 3}0.654{col 55}{space 4} -91.3869{col 68}{space 3} 57.37953
+{txt}{space 8}1 11  {c |}{col 15}{res}{space 2}-32.16576{col 27}{space 2} 36.75677{col 38}{space 1}   -0.88{col 47}{space 3}0.382{col 55}{space 4}-104.2086{col 68}{space 3} 39.87706
+{txt}{space 8}1 12  {c |}{col 15}{res}{space 2}-45.53724{col 27}{space 2} 33.48215{col 38}{space 1}   -1.36{col 47}{space 3}0.174{col 55}{space 4}-111.1619{col 68}{space 3} 20.08737
+{txt}{space 8}1 13  {c |}{col 15}{res}{space 2}-39.55251{col 27}{space 2} 37.30759{col 38}{space 1}   -1.06{col 47}{space 3}0.289{col 55}{space 4}-112.6749{col 68}{space 3} 33.56992
+{txt}{space 8}1 14  {c |}{col 15}{res}{space 2}-35.19803{col 27}{space 2} 37.29681{col 38}{space 1}   -0.94{col 47}{space 3}0.345{col 55}{space 4}-108.2993{col 68}{space 3} 37.90326
+{txt}{space 8}1 15  {c |}{col 15}{res}{space 2}-52.48784{col 27}{space 2} 44.51615{col 38}{space 1}   -1.18{col 47}{space 3}0.238{col 55}{space 4}-139.7389{col 68}{space 3} 34.76326
+{txt}{space 8}1 16  {c |}{col 15}{res}{space 2}-70.64929{col 27}{space 2} 38.29754{col 38}{space 1}   -1.84{col 47}{space 3}0.065{col 55}{space 4} -145.712{col 68}{space 3}  4.41341
+{txt}{space 8}1 17  {c |}{col 15}{res}{space 2}        0{col 27}{txt}  (omitted)
+{space 13} {c |}
+{space 6}mhispan {c |}{col 15}{res}{space 2} -18.5074{col 27}{space 2}  61.1132{col 38}{space 1}   -0.30{col 47}{space 3}0.762{col 55}{space 4}-138.2885{col 68}{space 3} 101.2737
+{txt}{space 13} {c |}
+{space 6}mhispan#{c |}
+{space 7}dmeduc {c |}
+{space 8}1  0  {c |}{col 15}{res}{space 2} -148.708{col 27}{space 2} 264.9965{col 38}{space 1}   -0.56{col 47}{space 3}0.575{col 55}{space 4}-668.0978{col 68}{space 3} 370.6819
+{txt}{space 8}1  1  {c |}{col 15}{res}{space 2} -40.4001{col 27}{space 2} 318.1817{col 38}{space 1}   -0.13{col 47}{space 3}0.899{col 55}{space 4}-664.0324{col 68}{space 3} 583.2322
+{txt}{space 8}1  2  {c |}{col 15}{res}{space 2} 39.52068{col 27}{space 2} 264.6485{col 38}{space 1}    0.15{col 47}{space 3}0.881{col 55}{space 4}-479.1871{col 68}{space 3} 558.2284
+{txt}{space 8}1  3  {c |}{col 15}{res}{space 2}-15.15679{col 27}{space 2} 222.0885{col 38}{space 1}   -0.07{col 47}{space 3}0.946{col 55}{space 4}-450.4475{col 68}{space 3}  420.134
+{txt}{space 8}1  4  {c |}{col 15}{res}{space 2} -308.641{col 27}{space 2} 235.9598{col 38}{space 1}   -1.31{col 47}{space 3}0.191{col 55}{space 4}-771.1194{col 68}{space 3} 153.8373
+{txt}{space 8}1  5  {c |}{col 15}{res}{space 2} 154.8507{col 27}{space 2} 221.1036{col 38}{space 1}    0.70{col 47}{space 3}0.484{col 55}{space 4}-278.5095{col 68}{space 3}  588.211
+{txt}{space 8}1  6  {c |}{col 15}{res}{space 2}-129.0467{col 27}{space 2} 124.6274{col 38}{space 1}   -1.04{col 47}{space 3}0.300{col 55}{space 4}-373.3149{col 68}{space 3} 115.2214
+{txt}{space 8}1  7  {c |}{col 15}{res}{space 2}-17.55826{col 27}{space 2} 104.8627{col 38}{space 1}   -0.17{col 47}{space 3}0.867{col 55}{space 4} -223.088{col 68}{space 3} 187.9714
+{txt}{space 8}1  8  {c |}{col 15}{res}{space 2} -155.172{col 27}{space 2} 78.01111{col 38}{space 1}   -1.99{col 47}{space 3}0.047{col 55}{space 4}-308.0729{col 68}{space 3}-2.271225
+{txt}{space 8}1  9  {c |}{col 15}{res}{space 2} -54.5191{col 27}{space 2} 69.43597{col 38}{space 1}   -0.79{col 47}{space 3}0.432{col 55}{space 4}-190.6127{col 68}{space 3} 81.57455
+{txt}{space 8}1 10  {c |}{col 15}{res}{space 2}-61.22126{col 27}{space 2} 68.85468{col 38}{space 1}   -0.89{col 47}{space 3}0.374{col 55}{space 4}-196.1756{col 68}{space 3} 73.73308
+{txt}{space 8}1 11  {c |}{col 15}{res}{space 2}-100.9503{col 27}{space 2} 68.53912{col 38}{space 1}   -1.47{col 47}{space 3}0.141{col 55}{space 4}-235.2861{col 68}{space 3} 33.38557
+{txt}{space 8}1 12  {c |}{col 15}{res}{space 2}-79.37827{col 27}{space 2} 63.00265{col 38}{space 1}   -1.26{col 47}{space 3}0.208{col 55}{space 4}-202.8627{col 68}{space 3} 44.10615
+{txt}{space 8}1 13  {c |}{col 15}{res}{space 2}-54.28446{col 27}{space 2}  75.4065{col 38}{space 1}   -0.72{col 47}{space 3}0.472{col 55}{space 4}-202.0803{col 68}{space 3} 93.51136
+{txt}{space 8}1 14  {c |}{col 15}{res}{space 2}-27.35863{col 27}{space 2} 74.47253{col 38}{space 1}   -0.37{col 47}{space 3}0.713{col 55}{space 4}-173.3239{col 68}{space 3} 118.6066
+{txt}{space 8}1 15  {c |}{col 15}{res}{space 2} 10.02343{col 27}{space 2} 91.68144{col 38}{space 1}    0.11{col 47}{space 3}0.913{col 55}{space 4}-169.6711{col 68}{space 3} 189.7179
+{txt}{space 8}1 16  {c |}{col 15}{res}{space 2}-18.75315{col 27}{space 2} 77.53004{col 38}{space 1}   -0.24{col 47}{space 3}0.809{col 55}{space 4}-170.7111{col 68}{space 3} 133.2048
+{txt}{space 8}1 17  {c |}{col 15}{res}{space 2}        0{col 27}{txt}  (omitted)
+{space 13} {c |}
+{space 6}motherr {c |}{col 15}{res}{space 2}-70.13801{col 27}{space 2} 22.21572{col 38}{space 1}   -3.16{col 47}{space 3}0.002{col 55}{space 4}-113.6806{col 68}{space 3}-26.59547
+{txt}{space 5}foreignb {c |}{col 15}{res}{space 2}-27.73937{col 27}{space 2} 10.08278{col 38}{space 1}   -2.75{col 47}{space 3}0.006{col 55}{space 4}-47.50149{col 68}{space 3}-7.977253
+{txt}{space 8}dfage {c |}{col 15}{res}{space 2} -.182024{col 27}{space 2} .4163423{col 38}{space 1}   -0.44{col 47}{space 3}0.662{col 55}{space 4}-.9980497{col 68}{space 3} .6340018
+{txt}{space 7}dfeduc {c |}{col 15}{res}{space 2} 6.127602{col 27}{space 2} 1.004101{col 38}{space 1}    6.10{col 47}{space 3}0.000{col 55}{space 4} 4.159577{col 68}{space 3} 8.095628
+{txt}{space 7}fblack {c |}{col 15}{res}{space 2}-64.46767{col 27}{space 2} 13.42542{col 38}{space 1}   -4.80{col 47}{space 3}0.000{col 55}{space 4}-90.78133{col 68}{space 3}-38.15401
+{txt}{space 6}fhispan {c |}{col 15}{res}{space 2}-44.62065{col 27}{space 2} 14.69584{col 38}{space 1}   -3.04{col 47}{space 3}0.002{col 55}{space 4}-73.42431{col 68}{space 3}-15.81699
+{txt}{space 6}fotherr {c |}{col 15}{res}{space 2}-120.2334{col 27}{space 2} 21.78708{col 38}{space 1}   -5.52{col 47}{space 3}0.000{col 55}{space 4}-162.9358{col 68}{space 3}-77.53098
+{txt}{space 6}alcohol {c |}{col 15}{res}{space 2}-6.158326{col 27}{space 2} 17.70316{col 38}{space 1}   -0.35{col 47}{space 3}0.728{col 55}{space 4} -40.8563{col 68}{space 3} 28.53965
+{txt}{space 8}drink {c |}{col 15}{res}{space 2}-15.99232{col 27}{space 2} 3.028536{col 38}{space 1}   -5.28{col 47}{space 3}0.000{col 55}{space 4}-21.92821{col 68}{space 3}-10.05642
+{txt}{space 13} {c |}
+{space 6}alcohol#{c |}
+{space 6}tripre0 {c |}
+{space 9}0 1  {c |}{col 15}{res}{space 2}-10.62612{col 27}{space 2}  57.2832{col 38}{space 1}   -0.19{col 47}{space 3}0.853{col 55}{space 4}-122.9005{col 68}{space 3} 101.6482
+{txt}{space 9}1 0  {c |}{col 15}{res}{space 2}        0{col 27}{txt}  (omitted)
+{space 9}1 1  {c |}{col 15}{res}{space 2}        0{col 27}{txt}  (omitted)
+{space 13} {c |}
+{space 6}tripre0 {c |}{col 15}{res}{space 2}-106.2943{col 27}{space 2} 55.89931{col 38}{space 1}   -1.90{col 47}{space 3}0.057{col 55}{space 4}-215.8562{col 68}{space 3} 3.267679
+{txt}{space 6}tripre2 {c |}{col 15}{res}{space 2} 38.18391{col 27}{space 2} 7.838112{col 38}{space 1}    4.87{col 47}{space 3}0.000{col 55}{space 4} 22.82131{col 68}{space 3} 53.54652
+{txt}{space 6}tripre3 {c |}{col 15}{res}{space 2} 70.50087{col 27}{space 2}  16.7921{col 38}{space 1}    4.20{col 47}{space 3}0.000{col 55}{space 4} 37.58856{col 68}{space 3} 103.4132
+{txt}{space 5}nprevist {c |}{col 15}{res}{space 2} 36.11379{col 27}{space 2} .6827415{col 38}{space 1}   52.90{col 47}{space 3}0.000{col 55}{space 4} 34.77562{col 68}{space 3} 37.45195
+{txt}{space 5}adequac2 {c |}{col 15}{res}{space 2} 58.56684{col 27}{space 2}  7.37719{col 38}{space 1}    7.94{col 47}{space 3}0.000{col 55}{space 4} 44.10763{col 68}{space 3} 73.02604
+{txt}{space 5}adequac3 {c |}{col 15}{res}{space 2} 135.7596{col 27}{space 2} 15.33326{col 38}{space 1}    8.85{col 47}{space 3}0.000{col 55}{space 4} 105.7066{col 68}{space 3} 165.8126
+{txt}{space 8}first {c |}{col 15}{res}{space 2}-86.07915{col 27}{space 2} 6.038273{col 38}{space 1}  -14.26{col 47}{space 3}0.000{col 55}{space 4} -97.9141{col 68}{space 3}-74.24421
+{txt}{space 6}dlivord {c |}{col 15}{res}{space 2}  26.2083{col 27}{space 2} 2.271416{col 38}{space 1}   11.54{col 47}{space 3}0.000{col 55}{space 4} 21.75635{col 68}{space 3} 30.66024
+{txt}{space 7}disllb {c |}{col 15}{res}{space 2}  -.14886{col 27}{space 2} .0733133{col 38}{space 1}   -2.03{col 47}{space 3}0.042{col 55}{space 4}-.2925531{col 68}{space 3}-.0051668
+{txt}{space 6}pre4000 {c |}{col 15}{res}{space 2}  465.455{col 27}{space 2} 16.61637{col 38}{space 1}   28.01{col 47}{space 3}0.000{col 55}{space 4} 432.8871{col 68}{space 3} 498.0229
+{txt}{space 7}plural {c |}{col 15}{res}{space 2}-973.0703{col 27}{space 2} 13.46039{col 38}{space 1}  -72.29{col 47}{space 3}0.000{col 55}{space 4}-999.4525{col 68}{space 3}-946.6881
+{txt}{space 6}diabete {c |}{col 15}{res}{space 2} 51.28199{col 27}{space 2} 12.73187{col 38}{space 1}    4.03{col 47}{space 3}0.000{col 55}{space 4} 26.32767{col 68}{space 3} 76.23631
+{txt}{space 7}anemia {c |}{col 15}{res}{space 2}-64.84938{col 27}{space 2}  17.8817{col 38}{space 1}   -3.63{col 47}{space 3}0.000{col 55}{space 4} -99.8973{col 68}{space 3}-29.80147
+{txt}{space 6}cardiac {c |}{col 15}{res}{space 2}-47.62126{col 27}{space 2}  24.6297{col 38}{space 1}   -1.93{col 47}{space 3}0.053{col 55}{space 4}-95.89517{col 68}{space 3} .6526495
+{txt}{space 7}chyper {c |}{col 15}{res}{space 2}-174.2691{col 27}{space 2}  19.1933{col 38}{space 1}   -9.08{col 47}{space 3}0.000{col 55}{space 4}-211.8878{col 68}{space 3}-136.6505
+{txt}{space 8}_cons {c |}{col 15}{res}{space 2} 2911.411{col 27}{space 2} 106.4968{col 38}{space 1}   27.34{col 47}{space 3}0.000{col 55}{space 4} 2702.679{col 68}{space 3} 3120.144
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. ***kernel regression
+. kernreg1 tobacco dmeduc,  kercode(3) npoint(45)
+{txt}
+{com}. tab cigar
+
+      {txt}cigar {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}     82,579       82.58       82.58
+{txt}          1 {c |}{res}        244        0.24       82.82
+{txt}          2 {c |}{res}        562        0.56       83.38
+{txt}          3 {c |}{res}        726        0.73       84.11
+{txt}          4 {c |}{res}        531        0.53       84.64
+{txt}          5 {c |}{res}      1,299        1.30       85.94
+{txt}          6 {c |}{res}        509        0.51       86.45
+{txt}          7 {c |}{res}        330        0.33       86.78
+{txt}          8 {c |}{res}        314        0.31       87.09
+{txt}          9 {c |}{res}         53        0.05       87.15
+{txt}         10 {c |}{res}      5,970        5.97       93.12
+{txt}         11 {c |}{res}         22        0.02       93.14
+{txt}         12 {c |}{res}        160        0.16       93.30
+{txt}         13 {c |}{res}         71        0.07       93.37
+{txt}         14 {c |}{res}         31        0.03       93.40
+{txt}         15 {c |}{res}        919        0.92       94.32
+{txt}         16 {c |}{res}         28        0.03       94.35
+{txt}         17 {c |}{res}          4        0.00       94.35
+{txt}         18 {c |}{res}         50        0.05       94.40
+{txt}         19 {c |}{res}          5        0.01       94.41
+{txt}         20 {c |}{res}      4,603        4.60       99.01
+{txt}         21 {c |}{res}         12        0.01       99.02
+{txt}         22 {c |}{res}          3        0.00       99.02
+{txt}         23 {c |}{res}         11        0.01       99.04
+{txt}         24 {c |}{res}          7        0.01       99.04
+{txt}         25 {c |}{res}         76        0.08       99.12
+{txt}         26 {c |}{res}          1        0.00       99.12
+{txt}         27 {c |}{res}          1        0.00       99.12
+{txt}         29 {c |}{res}          1        0.00       99.12
+{txt}         30 {c |}{res}        594        0.59       99.72
+{txt}         34 {c |}{res}          1        0.00       99.72
+{txt}         35 {c |}{res}         18        0.02       99.73
+{txt}         37 {c |}{res}          1        0.00       99.74
+{txt}         40 {c |}{res}        225        0.23       99.96
+{txt}         45 {c |}{res}          1        0.00       99.96
+{txt}         50 {c |}{res}         18        0.02       99.98
+{txt}         53 {c |}{res}          1        0.00       99.98
+{txt}         60 {c |}{res}         15        0.01      100.00
+{txt}         63 {c |}{res}          1        0.00      100.00
+{txt}         80 {c |}{res}          3        0.00      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    100,000      100.00
+{txt}
+{com}. kernreg1 cigar dmeduc if cigar>0 & cigar<15,  kercode(3) npoint(45)
+{txt}
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\azhao02\OneDrive - Syracuse University\ECN 623 Homework 1 Spring 2022 Ang Zhao.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 1 Mar 2022, 09:55:12
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
